@@ -7,12 +7,15 @@ on:
 
 jobs:
   wiz-cli-iac-scan:
-    name: 'Wiz-cli IaC Scan'
+    name: 'Wiz-cli Docker Scan'
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
       SCAN_PATH: "aws"
-      POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
+      IMAGE: wizsetestimage
+      TAG: latest
+      IAC_POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
+      VULN_POLICIES: "derek-vlun"
       WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
       WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
       WIZ_ENV: ${{ secrets.WIZ_ENV }}
@@ -35,8 +38,16 @@ jobs:
 
     - name: Run wiz-cli IaC scan
       run: |
-        ./wizcli iac scan --path $SCAN_PATH --policy "$POLICY" -p "secrets"
+        ./wizcli iac scan --path $SCAN_PATH --policy "$IAC_POLICY" -p "secrets"
     
     - name: Build the Docker image
       run: |
-        ./wizcli docker scan --image $IMAGE --policy "$POLICY" -p "secrets"
+        docker build container -t $IMAGE:$TAG
+    
+    - name: Run wiz-cli Docker scan
+      run: |
+        ./wizcli docker scan --image $IMAGE:$TAG --policy "$VULN_POLICIES" -p "secrets"
+    
+    - name: Push docker image
+      run: |
+        echo "Pushing image here"
