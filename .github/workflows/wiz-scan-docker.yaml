@@ -42,7 +42,7 @@ jobs:
     
     - name: Build the Docker image
       run: |
-        docker build -f container/Dockerfile -t $IMAGE:$TAG
+        docker build container -t $IMAGE:$TAG
     
     - name: Run wiz-cli Docker scan
       run: |
