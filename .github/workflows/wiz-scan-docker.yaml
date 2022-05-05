@@ -7,7 +7,7 @@ on:
 
 jobs:
   wiz-cli-iac-scan:
-    name: 'Wiz-cli IaC Scan'
+    name: 'Wiz-cli Docker Scan'
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
@@ -46,7 +46,7 @@ jobs:
     
     - name: Run wiz-cli Docker scan
       run: |
-        ./wizcli iac scan --image $IMAGE:$TAG --policy "$VULN_POLICIES" -p "secrets"
+        ./wizcli docker scan --image $IMAGE:$TAG --policy "$VULN_POLICIES" -p "secrets"
     
     - name: Push docker image
       run: |
