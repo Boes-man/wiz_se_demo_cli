@@ -1,8 +1,10 @@
 name: 'wiz-cli-iac'
 on: 
+  push:
+    branches: [iac]
+on: 
   pull_request:
-    branches:
-      - iac
+    branches: [iac]
 
 
 jobs:
