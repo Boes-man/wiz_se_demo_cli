@@ -1,4 +1,4 @@
-name: 'wiz-cli'
+name: 'wiz-cli-container'
 on: 
   pull_request:
     branches:
