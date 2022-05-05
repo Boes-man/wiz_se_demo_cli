@@ -2,7 +2,7 @@ name: 'wiz-cli'
 on: 
   pull_request:
     branches:
-      - iac
+      - container
 
 
 jobs:
@@ -36,3 +36,7 @@ jobs:
     - name: Run wiz-cli IaC scan
       run: |
         ./wizcli iac scan --path $SCAN_PATH --policy "$POLICY" -p "secrets"
+    
+    - name: Build the Docker image
+      run: |
+        ./wizcli docker scan --image $IMAGE --policy "$POLICY" -p "secrets"
