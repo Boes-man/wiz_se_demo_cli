@@ -38,7 +38,7 @@ jobs:
 
     - name: Run wiz-cli IaC scan
       run: |
-        ./wizcli iac scan --path $SCAN_PATH --policy "$IAC_POLICY" -p "secrets"
+        ./wizcli iac scan --path $SCAN_PATH --policy "$IAC_POLICY" # -p "secrets"
     
     - name: Build the Docker image
       run: |
