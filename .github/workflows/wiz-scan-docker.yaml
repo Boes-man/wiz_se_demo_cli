@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
-      SCAN_PATH: "aws"
+      SCAN_PATH: "container"
       IMAGE: wizsetestimage
       TAG: latest
       IAC_POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
