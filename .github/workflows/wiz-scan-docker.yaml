@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
-      SCAN_PATH: "aws"
+      SCAN_PATH: "container"
       IMAGE: wizsetestimage
       TAG: latest
       IAC_POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
@@ -38,7 +38,7 @@ jobs:
 
     - name: Run wiz-cli IaC scan
       run: |
-        ./wizcli iac scan --path $SCAN_PATH --policy "$IAC_POLICY" -p "secrets"
+        ./wizcli iac scan --path $SCAN_PATH --policy "$IAC_POLICY" # -p "secrets"
     
     - name: Build the Docker image
       run: |
