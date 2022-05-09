@@ -24,7 +24,7 @@ This repository is dedicated to providing a starting point for SE demos using CI
 * Install pre-requisites
 * Install the Wiz-CLI Extension for VS Code
 
-## Usage
+## Basic Setup and Usage
 
 This repo is configured to have the following branches
 
@@ -38,7 +38,7 @@ The guthub actions located in `.github/workflows` will provide the required acti
 
 The `iac` branch will use the `wiz-scan-iac.yaml` action and the `container` branch will use the `wiz-scan-container.yaml` action.
 
-### Basic Setup
+### VS Code Setup
 
 Clone down a local copy of the repo and add it to VS Code
 Verify that you have all of the required branches
@@ -54,10 +54,22 @@ Use the git checkout command to swicth between branches
 Switched to branch 'iac'
 Your branch is up to date with 'origin/iac'.
 ```
-
 ### Container Scanning
 
+# Inventory
+| Item | Purpose|
+--------|--------|
+|secret.yaml| Contains secret in yaml|
+|Dockerfile| Image build instructions|
+|awssecret.txt|Contains secret in text|
+
 ### IaC Scanning
+
+# Inventory
+| Folder | Purpose|
+--------|--------|
+|`aws/terraforn-eks`| Terraform instructions to build an EKS cluster |
+|`azure/terraform-aks`| Terraform instruction to build an AKS cluster|
 
 ### Rebasing branches
 
