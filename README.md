@@ -5,12 +5,71 @@ This repository is dedicated to providing a starting point for SE demos using CI
 
 ## Requirements
 
+* Github Account
+* Git installed
+* VS Code
+* Wiz Service Account (`security_scan:create`)
+* Wiz-CLI
+* Ability to work with branches in Git
+
+### Good to haves
+
+* AWSCLI installed and operational
+* Azure CLI installed and operational
+* Terraform >= 1.0 installed and operational
+* Docker installed and running
+
 ## Configuration
+
+* Install pre-requisites
+* Install the Wiz-CLI Extension for VS Code
 
 ## Usage
 
-## Container Scanning
+This repo is configured to have the following branches
 
-## IaC Scanning
+* container
+* iac
+* main
 
-## Branch Protection
+The main branch is the protected branch which will be the target of all pull requests.
+
+The guthub actions located in `.github/workflows` will provide the required actions during PRs
+
+The `iac` branch will use the `wiz-scan-iac.yaml` action and the `container` branch will use the `wiz-scan-container.yaml` action.
+
+### Basic Setup
+
+Clone down a local copy of the repo and add it to VS Code
+Verify that you have all of the required branches
+```
+> git branch
+  container
+  iac
+* main
+```
+Use the git checkout command to swicth between branches
+```
+> git checkout iac
+Switched to branch 'iac'
+Your branch is up to date with 'origin/iac'.
+```
+
+### Container Scanning
+
+### IaC Scanning
+
+### Rebasing branches
+
+Due to drift in the branches you may find that you need to rebase your banches back to main.
+
+The below example will `rebase` your branch with the `main` branch bringing it in direct sync with the `main` branch.
+
+NOTE: This will `stash` any changes you have in this branch!!
+
+```
+> git checkout <branch>
+> git stash
+> git rebase origin/main
+> git push --force
+```
