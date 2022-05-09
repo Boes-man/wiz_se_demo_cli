@@ -56,7 +56,7 @@ Your branch is up to date with 'origin/iac'.
 ```
 ### Container Scanning
 
-# Inventory
+<b>Inventory</b></br>
 | Item | Purpose|
 --------|--------|
 |secret.yaml| Contains secret in yaml|
@@ -65,7 +65,7 @@ Your branch is up to date with 'origin/iac'.
 
 ### IaC Scanning
 
-# Inventory
+<b>Inventory</b></br>
 | Folder | Purpose|
 --------|--------|
 |`aws/terraforn-eks`| Terraform instructions to build an EKS cluster |
