@@ -21,7 +21,24 @@ This repository is dedicated to providing a starting point for SE demos using CI
 
 ## Configuration
 
-Create a new repository from the template repository
+1. Create a new repository from the template repository
+
+![](images/create_from_template.png)
+
+2. Set repository target and name
+
+![](images/create_repo.png)
+
+4. Get coffee
+
+☕️ Template cleanup process takes a few minutes
+
+5. Check for branches
+
+![](images/check_branches.png)
+
+
+
 
 
 
@@ -29,8 +46,10 @@ Create a new repository from the template repository
 
 This repo is configured to have the following branches
 
-* container
-* iac
+* container-pass
+* container-fail
+* iac-pass
+* iac-fail
 * main
 
 The main branch is the protected branch which will be the target of all pull requests.
