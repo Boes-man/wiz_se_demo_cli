@@ -37,7 +37,9 @@ This repository is dedicated to providing a starting point for SE demos using CI
 
 ![](images/check_branches.png)
 
-6. Recreate repository secrets
+6. Recreate repository secrets (obtained from Wiz service account `security_scan:create`)
+  * WIZ_CLIENT_ID
+  * WIZ_CLIENT_SECRET
 
 ![](images/create_secrets.png)
 ## Basic Usage
