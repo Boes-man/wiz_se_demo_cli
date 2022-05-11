@@ -6,14 +6,14 @@ This repository is dedicated to providing a starting point for SE demos using CI
 ## Requirements
 
 * Github Account
-* Git installed
-* VS Code
 * Wiz Service Account (`security_scan:create`)
-* Wiz-CLI
 * Ability to work with branches in Git
 
-### Good to haves
+### OPTIONAL - Supporting requirements for dev machine
 
+* Git installed
+* VS Code
+* Wiz-CLI
 * AWSCLI installed and operational
 * Azure CLI installed and operational
 * Terraform >= 1.0 installed and operational
@@ -21,8 +21,9 @@ This repository is dedicated to providing a starting point for SE demos using CI
 
 ## Configuration
 
-* Install pre-requisites
-* Install the Wiz-CLI Extension for VS Code
+Create a new repository from the template repository
+
+
 
 ## Basic Setup and Usage
 
