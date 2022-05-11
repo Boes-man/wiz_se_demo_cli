@@ -37,7 +37,9 @@ This repository is dedicated to providing a starting point for SE demos using CI
 
 ![](images/check_branches.png)
 
+6. Recreate repository secrets
 
+![](images/create_secrets.png)
 ## Basic Usage
 
 This repo is configured to have the following branches
