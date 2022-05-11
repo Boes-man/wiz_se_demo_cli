@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
 
   # Run cleaning process only if workflow is triggered by the non-wiz_se_demo_template repository.
