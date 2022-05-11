@@ -19,13 +19,13 @@ This repository is dedicated to providing a starting point for SE demos using CI
 * Terraform >= 1.0 installed and operational
 * Docker installed and running
 
-## Configuration
+## Basic Setup
 
 1. Create a new repository from the template repository
 
 ![](images/create_from_template.png)
 
-2. Set repository target and name
+2. Set repository target and name (customize name to fit your needs)
 
 ![](images/create_repo.png)
 
@@ -38,11 +38,7 @@ This repository is dedicated to providing a starting point for SE demos using CI
 ![](images/check_branches.png)
 
 
-
-
-
-
-## Basic Setup and Usage
+## Basic Usage
 
 This repo is configured to have the following branches
 
