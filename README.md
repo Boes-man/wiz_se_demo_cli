@@ -58,21 +58,25 @@ The guthub actions located in `.github/workflows` will provide the required acti
 
 The `iac` branch will use the `wiz-scan-iac.yaml` action and the `container` branch will use the `wiz-scan-container.yaml` action.
 
-### VS Code Setup
+### OPTIONAL - VS Code Setup
 
 Clone down a local copy of the repo and add it to VS Code
 Verify that you have all of the required branches
+
 ```
+> git fetch
 > git branch
-  container
-  iac
+  container-pass
+  iac-pass
+  container-fail
+  iac-fail
 * main
 ```
 Use the git checkout command to swicth between branches
 ```
 > git checkout iac
-Switched to branch 'iac'
-Your branch is up to date with 'origin/iac'.
+Switched to branch 'iac-pass'
+Your branch is up to date with 'origin/iac-pass'.
 ```
 ### Container Scanning
 
@@ -105,3 +109,4 @@ NOTE: This will `stash` any changes you have in this branch!!
 > git rebase origin/main
 > git push --force
 ```
+
