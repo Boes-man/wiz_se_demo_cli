@@ -46,10 +46,26 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
       
-      - name: GitHub Push
+      - name: GitHub Push Branch IaC-Pass
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: iac-pass
-          
 
+      - name: GitHub Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: iac-fail
+      
+      - name: GitHub Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: container-pass
+
+      - name: GitHub Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: container-fail
