@@ -27,6 +27,8 @@ This repository is dedicated to providing a starting point for SE demos using CI
 
 2. Set repository target and name (customize name to fit your needs)
 
+NOTE: BE SURE TO SELECT YOUR PERSONAL REPO
+
 ![](images/create_repo.png)
 
 4. Get coffee
@@ -52,7 +54,29 @@ This repo is configured to have the following branches
 * iac-fail
 * main
 
-The main branch is the protected branch which will be the target of all pull requests.
+1. Each branch has a text file in the root of the branch with the same name referred to here as `branch-file.txt`.
+
+2. To make code PRs easier you can simply modify the text in the `branch-file.txt` to get a code change to submit.
+
+![](images/branch-file.png)
+
+3. Double click the file to access the editor.
+
+![](images/edit_branch-file.png)
+
+4. Add or change contents of the file and commit changes
+
+![](images/commit-changes.png)
+
+5. Navigate back to the repo root and you should see `compare & pull request`
+
+![](images/compare-pull-request.png)
+
+6. Simply use all of the defaults and select `create pull request`
+
+![](images/create-pr.png)
+
+7. Repeat for the other branches branches
 
 The guthub actions located in `.github/workflows` will provide the required actions during PRs
 
