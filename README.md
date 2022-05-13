@@ -31,6 +31,12 @@ NOTE: BE SURE TO SELECT YOUR PERSONAL REPO
 
 ![](images/create_repo.png)
 
+3. Recreate repository secrets (obtained from Wiz service account `security_scan:create`)
+  * WIZ_CLIENT_ID
+  * WIZ_CLIENT_SECRET
+
+![](images/create_secrets.png)
+
 4. Get coffee
 
 ☕️ Template cleanup process takes a few minutes
@@ -39,20 +45,17 @@ NOTE: BE SURE TO SELECT YOUR PERSONAL REPO
 
 ![](images/check_branches.png)
 
-6. Recreate repository secrets (obtained from Wiz service account `security_scan:create`)
-  * WIZ_CLIENT_ID
-  * WIZ_CLIENT_SECRET
 
-![](images/create_secrets.png)
 ## Basic Usage
 
-This repo is configured to have the following branches
+This repo is configured to have the following additonal branches
 
 * container-pass
 * container-fail
 * iac-pass
 * iac-fail
-* main
+
+**(main branch not shown here)**
 
 1. Each branch has a text file in the root of the branch with the same name referred to here as `branch-file.txt`.
 
@@ -82,6 +85,22 @@ The guthub actions located in `.github/workflows` will provide the required acti
 
 The `iac` branch will use the `wiz-scan-iac.yaml` action and the `container` branch will use the `wiz-scan-container.yaml` action.
 
+8. Enable branch protection
+
+![](images/branch-protection.png)
+
+9. Configure branch protection for `main`
+
+![](images/branch_policy.png)
+
+**NOTE: BE SURE TO SELECT ONE ACTION** `Wiz-cli Container Scan` and `Wiz-cli IaC Scan`
+
+10. Go back and view you PRs
+
+## Miscellaneous
+
+This repository is currently under development. If you see a problem please open an issue.
+
 ### OPTIONAL - VS Code Setup
 
 Clone down a local copy of the repo and add it to VS Code
@@ -96,7 +115,7 @@ Verify that you have all of the required branches
   iac-fail
 * main
 ```
-Use the git checkout command to swicth between branches
+Use the git checkout command to switch between branches
 ```
 > git checkout iac
 Switched to branch 'iac-pass'
@@ -118,19 +137,4 @@ Your branch is up to date with 'origin/iac-pass'.
 --------|--------|
 |`aws/terraforn-eks`| Terraform instructions to build an EKS cluster |
 |`azure/terraform-aks`| Terraform instruction to build an AKS cluster|
-
-### Rebasing branches
-
-Due to drift in the branches you may find that you need to rebase your banches back to main.
-
-The below example will `rebase` your branch with the `main` branch bringing it in direct sync with the `main` branch.
-
-NOTE: This will `stash` any changes you have in this branch!!
-
-```
-> git checkout <branch>
-> git stash
-> git rebase origin/main
-> git push --force
-```
 
