@@ -43,12 +43,22 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
+
+      # Commit modified files
+      - name: Create IaC-Pass file
+        run: |
+          echo "testfile_iac_pass" > iac-pass.txt
       
       - name: GitHub Push Branch IaC-Pass
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: iac-pass
+
+      # Commit modified files
+      - name: Create IaC-Fail file
+        run: |
+          echo "testfile_iac_fail" > iac-fail.txt
 
       - name: GitHub Push Branch IaC-Fail
         uses: ad-m/github-push-action@master
