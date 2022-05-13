@@ -14,7 +14,7 @@ on:
     - iac-fail
 
 jobs:
-  wiz-cli-iac-scan:
+  wiz-cli-container-scan:
     if: contains(github.ref, 'container')
     name: 'Wiz-cli Dockerfile and Container Scan'
     runs-on: ubuntu-latest
@@ -70,7 +70,7 @@ jobs:
       run: |
         echo "Pushing image here"
 
-  wiz-cli-container-scan:
+  wiz-cli-iac-scan:
     if: contains(github.ref, 'iac')
     name: 'Wiz-cli IaC Scan'
     runs-on: ubuntu-latest
