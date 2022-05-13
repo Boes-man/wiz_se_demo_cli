@@ -65,14 +65,24 @@ jobs:
           git commit -m "IAC Fail Updates"
           git push --set-upstream origin iac-fail
       
-      - name: GitHub Push Branch Container-Pass
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: container-pass
-
-      - name: GitHub Push Branch Container-Fail
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: container-fail
+       # Commit modified files
+      - name: Create Container-Pass file
+        run: |
+          git checkout main
+          git branch container-pass
+          git checkout container-pass
+          echo "testfile_container_pass" > container-pass.txt
+          git add .
+          git commit -m "Container Pass Updates"
+          git push --set-upstream origin container-pass
+          
+       # Commit modified files
+      - name: Create Container-Fail file
+        run: |
+          git checkout main
+          git branch container-fail
+          git checkout container-fail
+          echo "testfile_container_fail" > container-fail.txt
+          git add .
+          git commit -m "Container Fail Updates"
+          git push --set-upstream origin container-fail
