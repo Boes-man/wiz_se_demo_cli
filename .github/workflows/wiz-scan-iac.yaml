@@ -5,6 +5,7 @@ on:
     - iac-pass
     - iac-fail
   pull_request:
+    branches:
     - iac-pass
     - iac-fail
 
