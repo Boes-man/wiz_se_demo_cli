@@ -52,19 +52,19 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: iac-pass
 
-      - name: GitHub Push
+      - name: GitHub Push Branch IaC-Fail
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: iac-fail
       
-      - name: GitHub Push
+      - name: GitHub Push Branch Container-Pass
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: container-pass
 
-      - name: GitHub Push
+      - name: GitHub Push Branch Container-Fail
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
