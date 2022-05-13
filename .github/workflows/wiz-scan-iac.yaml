@@ -1,9 +1,9 @@
 name: 'wiz-cli-iac'
 on: 
   push:
-    branches: [iac-pass,iac-fail]
+    branches: [iac-*]
   pull_request:
-    branches: [iac-pass,iac-fail]
+    branches: [iac-*]
 
 
 jobs:
