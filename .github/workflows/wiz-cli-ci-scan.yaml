@@ -15,8 +15,8 @@ on:
 
 jobs:
   wiz-cli-iac-scan:
-    if: contains(github.ref, 'iac')
-    name: 'Wiz-cli IaC Scan'
+    if: contains(github.ref, 'container')
+    name: 'Wiz-cli Dockerfile and Container Scan'
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
@@ -71,8 +71,8 @@ jobs:
         echo "Pushing image here"
 
   wiz-cli-container-scan:
-    if: contains(github.ref, 'container')
-    name: 'Wiz-cli Container Scan'
+    if: contains(github.ref, 'iac')
+    name: 'Wiz-cli IaC Scan'
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
