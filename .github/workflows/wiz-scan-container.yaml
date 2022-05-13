@@ -1,9 +1,9 @@
 name: 'wiz-cli-container'
 on: 
   push:
-    branches: [container-*]
+    branches: [container-pass,container-fail]
   pull_request:
-    branches: [container-*]
+    branches: [container-pass,container-fail]
 
 jobs:
   wiz-cli-iac-scan:
