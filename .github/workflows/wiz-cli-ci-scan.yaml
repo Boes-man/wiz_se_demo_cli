@@ -15,10 +15,7 @@ on:
 
 jobs:
   wiz-cli-iac-scan:
-    if: contains(
-        refs/heads/container-fail
-        refs/heads/container-pass
-      , github.ref)
+    if: contains(github.ref, 'container')
     name: 'Wiz-cli IaC Scan'
     runs-on: ubuntu-latest
     env:
@@ -61,7 +58,7 @@ jobs:
       run: |
         ./wizcli iac scan --path ${{ env.SCAN_PATH }} --policy "$IAC_POLICY" -p "secrets"
 
-    - name: Build the Passing Docker image
+    - name: Build the Docker image
       run: |
         docker build ${{ env.SCAN_PATH }} -t $IMAGE:$TAG
     
@@ -74,10 +71,7 @@ jobs:
         echo "Pushing image here"
 
   wiz-cli-container-scan:
-    if: contains(
-        refs/heads/container-fail
-        refs/heads/container-pass
-      , github.ref)
+    if: contains(github.ref, 'iac')
     name: 'Wiz-cli Container Scan'
     runs-on: ubuntu-latest
     env:
