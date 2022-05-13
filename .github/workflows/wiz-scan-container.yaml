@@ -2,9 +2,11 @@ name: 'wiz-cli-container'
 on: 
   push:
     branches: 
+    - container-fail
     - container-pass
   pull_request:
     branches:
+    - container-fail
     - container-pass
 
 jobs:
