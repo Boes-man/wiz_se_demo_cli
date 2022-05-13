@@ -1,5 +1,11 @@
 name: 'wiz-cli-ci-scan'
 on: 
+  push:
+    branches: 
+    - container-fail
+    - container-pass
+    - iac-pass
+    - iac-fail
   pull_request:
     branches:
     - container-fail
@@ -9,7 +15,7 @@ on:
 
 jobs:
   wiz-cli-container-scan:
-    if: contains(github.ref, 'container')
+    if: contains(github.event.pull_request.base.ref, 'container')
     name: 'Wiz-cli Dockerfile and Container Scan'
     runs-on: ubuntu-latest
     env:
@@ -65,7 +71,7 @@ jobs:
         echo "Pushing image here"
 
   wiz-cli-iac-scan:
-    if: contains(github.ref, 'iac')
+    if: contains(github.event.pull_request.base.ref, 'iac')
     name: 'Wiz-cli IaC Scan'
     runs-on: ubuntu-latest
     env:
