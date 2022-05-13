@@ -47,7 +47,7 @@ jobs:
 
     - name: Run wiz-cli IaC scan
       run: |
-        ./wizcli iac scan --path ${{ env.SCAN_PATH }} --policy "$IAC_POLICY" # -p "secrets"
+        ./wizcli iac scan --path ${{ env.SCAN_PATH }} --policy "$IAC_POLICY" -p "secrets"
 
     - name: Build the Passing Docker image
       run: |

@@ -47,4 +47,4 @@ jobs:
 
     - name: Run wiz-cli IaC scan
       run: |
-        ./wizcli iac scan --path ${{ env.SCAN_PATH }} --policy "$POLICY" -p "secrets"
+        ./wizcli iac scan --path ${{ env.SCAN_PATH }} --policy "$POLICIES" -p "secrets"
