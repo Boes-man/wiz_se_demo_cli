@@ -49,6 +49,8 @@ jobs:
         run: |
           git branch iac-pass
           echo "testfile_iac_pass" > iac-pass.txt
+          git add .
+          git commit -m "IAC Pass Updates"
           git push
       
 #       - name: GitHub Push Branch IaC-Pass
@@ -61,6 +63,8 @@ jobs:
       - name: Create IaC-Fail file
         run: |
           git branch iac-fail
+          git add .
+          git commit -m "IAC Fail Updates"
           echo "testfile_iac_fail" > iac-fail.txt
           git push
 
