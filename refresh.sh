@@ -3,6 +3,8 @@ git stash
 git remote add template https://github.com/mccbryan3/wiz_se_demo_template
 git fetch --all
 git rebase template/main
+git rm .github/workflows/template-cleanup.yaml
+git rebase --skip
 git rebase origin container-pass
 git rebase origin container-fail
 git rebase origin iac-pass
