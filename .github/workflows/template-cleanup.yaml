@@ -48,10 +48,11 @@ jobs:
       - name: Create IaC-Pass file
         run: |
           git branch iac-pass
+          git checkout iac-pass
           echo "testfile_iac_pass" > iac-pass.txt
           git add .
           git commit -m "IAC Pass Updates"
-          git push
+          git push --set-upstream origin iac-pass
       
 #       - name: GitHub Push Branch IaC-Pass
 #         uses: ad-m/github-push-action@master
@@ -63,9 +64,10 @@ jobs:
       - name: Create IaC-Fail file
         run: |
           git branch iac-fail
+          git checkout iac-fail
+          echo "testfile_iac_fail" > iac-fail.txt
           git add .
           git commit -m "IAC Fail Updates"
-          echo "testfile_iac_fail" > iac-fail.txt
           git push
 
 #       - name: GitHub Push Branch IaC-Fail
