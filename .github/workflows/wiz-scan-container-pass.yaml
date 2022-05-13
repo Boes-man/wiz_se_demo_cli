@@ -1,0 +1,64 @@
+name: 'wiz-cli-container'
+on: 
+  push:
+    branches: 
+    - container-pass
+  pull_request:
+    branches:
+    - container-pass
+
+jobs:
+  wiz-cli-iac-scan:
+    name: 'Wiz-cli Docker Scan'
+    runs-on: ubuntu-latest
+    env:
+      # Set the relative path in the repo to scan
+      SCAN_PATH_PASS: "container-pass"
+      SCAN_PATH_FAIL: "container-fail"
+      IMAGE: setestimage
+      TAG: latest
+      IAC_POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
+      VULN_POLICIES: "derek-vlun"
+      WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
+      WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
+      WIZ_ENV: ${{ secrets.WIZ_ENV }}
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set path based on pass branch
+      run: echo "SCAN_PATH=$SCAN_PATH_PASS" >> $GITHUB_ENV
+      if: ${{ github.ref == 'refs/heads/container-pass' }}
+
+    - name: Set path based on fail branch
+      run: echo "SCAN_PATH=$SCAN_PATH_FAIL" >> $GITHUB_ENV
+      if: ${{ github.ref == 'refs/heads/container-fail' }}
+
+    - name: Download Wiz-cli
+      run: curl -o wizcli https://wizcli.app.wiz.io/wizcli && chmod +x wizcli
+
+    - name: Authenticate to Wiz
+      run: ./wizcli auth --id "$WIZ_CLIENT_ID" --secret "$WIZ_CLIENT_SECRET"
+
+    - name: Run wiz-cli IaC scan
+      run: |
+        ./wizcli iac scan --path ${{ env.SCAN_PATH }} --policy "$IAC_POLICY" -p "secrets"
+
+    - name: Build the Passing Docker image
+      run: |
+        docker build ${{ env.SCAN_PATH }} -t $IMAGE:$TAG
+    
+    - name: Run wiz-cli Docker scan
+      run: |
+        ./wizcli docker scan --image $IMAGE:$TAG --policy "$VULN_POLICIES" -p "secrets"
+    
+    - name: Push docker image
+      run: |
+        echo "Pushing image here"
