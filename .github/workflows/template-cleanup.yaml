@@ -55,6 +55,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: iac-pass
 
+      - name: Check out repository
+        uses: actions/checkout@v2
+     
       # Commit modified files
       - name: Create IaC-Fail file
         run: |
