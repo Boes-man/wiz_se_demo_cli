@@ -9,17 +9,16 @@ on:
     - iac-pass
     - iac-fail
 
-
 jobs:
   wiz-cli-iac-scan:
     name: 'Wiz-cli IaC Scan'
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
-      SCAN_PATH_AWS_PASS: "aws\\terraform-eks-pass"
-      SCAN_PATH_AWS_FAIL: "aws\\terraform-eks-fail"
-      SCAN_PATH_AZ_PASS: "azure\\terraform-aks-pass"
-      SCAN_PATH_AZ_FAIL: "azure\\terraform-aks-fail"
+      SCAN_PATH_AWS_PASS: "aws/terraform-eks-pass"
+      SCAN_PATH_AWS_FAIL: "aws/terraform-eks-fail"
+      SCAN_PATH_AZ_PASS: "azure/terraform-aks-pass"
+      SCAN_PATH_AZ_FAIL: "azure/terraform-aks-fail"
       POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
       WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
       WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
