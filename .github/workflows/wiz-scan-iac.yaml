@@ -1,9 +1,9 @@
 name: 'wiz-cli-iac'
 on: 
   push:
-    branches: [iac-pass,iac-fail]
+    branches: [iac-*]
   pull_request:
-    branches: [iac-pass,iac-fail]
+    branches: [iac-*]
 
 
 jobs:
@@ -12,7 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
-      SCAN_PATH: "aws"
+      SCAN_PATH_AWS_PASS: "aws\\terraform-eks-pass"
+      SCAN_PATH_AWS_FAIL: "aws\\terraform-eks-fail"
+      SCAN_PATH_AWS_PASS: "azure\\terraform-aks-pass"
+      SCAN_PATH_AWS_FAIL: "azure\\terraform-aks-fail"
       POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
       WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
       WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
@@ -27,6 +30,14 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Check out repository
       uses: actions/checkout@v2
+    
+    - name: Set path for IaC scan pass
+      run: export SCAN_PATH=$SCAN_PATH_AWS_PASS
+      if: ${{ github.ref == 'refs/heads/iac-pass' }}
+
+    - name: Set path for IaC scan fail
+      run: export SCAN_PATH=$SCAN_PATH_AWS_FAIL
+      if: ${{ github.ref == 'refs/heads/iac-fail' }}
 
     - name: Download Wiz-cli
       run: curl -o wizcli https://wizcli.app.wiz.io/wizcli && chmod +x wizcli

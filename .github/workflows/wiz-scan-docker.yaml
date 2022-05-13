@@ -1,9 +1,9 @@
 name: 'wiz-cli-container'
 on: 
   push:
-    branches: [container-pass, container-fail]
+    branches: [container-*]
   pull_request:
-    branches: [container-pass, container-fail]
+    branches: [container-*]
 
 jobs:
   wiz-cli-iac-scan:
@@ -11,8 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
-      SCAN_PATH: "container"
-      IMAGE: wizsetestimage
+      SCAN_PATH_PASS: "container-pass"
+      SCAN_PATH_FAIL: "container-fail"
+      IMAGE: setestimage
       TAG: latest
       IAC_POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
       VULN_POLICIES: "derek-vlun"
@@ -30,6 +31,14 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
 
+    - name: Set path based on pass branch
+      run: export SCAN_PATH=$SCAN_PATH_PASS
+      if: ${{ github.ref == 'refs/heads/container-pass' }}
+
+    - name: Set path based on fail branch
+      run: export SCAN_PATH=$SCAN_PATH_FAIL
+      if: ${{ github.ref == 'refs/heads/container-fail' }}
+
     - name: Download Wiz-cli
       run: curl -o wizcli https://wizcli.app.wiz.io/wizcli && chmod +x wizcli
 
@@ -39,10 +48,14 @@ jobs:
     - name: Run wiz-cli IaC scan
       run: |
         ./wizcli iac scan --path $SCAN_PATH --policy "$IAC_POLICY" # -p "secrets"
-    
-    - name: Build the Docker image
+
+    - name: Build the Passing Docker image
       run: |
-        docker build container -t $IMAGE:$TAG
+        docker build $SCAN_PATH -t $IMAGE:$TAG
+
+    - name: Run wiz-cli IaC scan
+      run: |
+        ./wizcli iac scan --path $SCAN_PATH --policy "$IAC_POLICY" # -p "secrets"
     
     - name: Run wiz-cli Docker scan
       run: |
