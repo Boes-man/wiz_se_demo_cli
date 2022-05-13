@@ -53,28 +53,17 @@ jobs:
           git add .
           git commit -m "IAC Pass Updates"
           git push --set-upstream origin iac-pass
-      
-#       - name: GitHub Push Branch IaC-Pass
-#         uses: ad-m/github-push-action@master
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           branch: iac-pass
-     
+          
       # Commit modified files
       - name: Create IaC-Fail file
         run: |
+          git checkout main
           git branch iac-fail
           git checkout iac-fail
           echo "testfile_iac_fail" > iac-fail.txt
           git add .
           git commit -m "IAC Fail Updates"
-          git push
-
-#       - name: GitHub Push Branch IaC-Fail
-#         uses: ad-m/github-push-action@master
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           branch: iac-fail
+          git push --set-upstream origin iac-fail
       
       - name: GitHub Push Branch Container-Pass
         uses: ad-m/github-push-action@master
