@@ -25,10 +25,8 @@ jobs:
         uses: actions/checkout@v2.4.0
 
       # Cleanup project
-      - name: Cleanup
+      - name: Cleanup template workflow
         run: |
-
-          # Cleanup
           rm -rf \
             .github/workflows/template-cleanup.yaml
 
