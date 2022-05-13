@@ -32,11 +32,11 @@ jobs:
       uses: actions/checkout@v2
     
     - name: Set path for IaC scan pass
-      run: export SCAN_PATH=$SCAN_PATH_AWS_PASS
+      run: echo "SCAN_PATH=$SCAN_PATH_AWS_PASS" >> $GITHUB_ENV
       if: ${{ github.ref == 'refs/heads/iac-pass' }}
 
     - name: Set path for IaC scan fail
-      run: export SCAN_PATH=$SCAN_PATH_AWS_FAIL
+      run: echo  "SCAN_PATH=$SCAN_PATH_AWS_FAIL" >> $GITHUB_ENV
       if: ${{ github.ref == 'refs/heads/iac-fail' }}
 
     - name: Download Wiz-cli
@@ -47,4 +47,4 @@ jobs:
 
     - name: Run wiz-cli IaC scan
       run: |
-        ./wizcli iac scan --path $SCAN_PATH --policy "$POLICY" -p "secrets"
+        ./wizcli iac scan --path ${{ env.SCAN_PATH }} --policy "$POLICY" -p "secrets"

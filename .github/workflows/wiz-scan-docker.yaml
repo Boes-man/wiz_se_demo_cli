@@ -32,11 +32,11 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set path based on pass branch
-      run: export SCAN_PATH="$SCAN_PATH_PASS"
+      run: echo "SCAN_PATH=$SCAN_PATH_PASS" >> $GITHUB_ENV
       if: ${{ github.ref == 'refs/heads/container-pass' }}
 
     - name: Set path based on fail branch
-      run: export SCAN_PATH=$SCAN_PATH_FAIL
+      run: echo "SCAN_PATH=$SCAN_PATH_FAIL" >> $GITHUB_ENV
       if: ${{ github.ref == 'refs/heads/container-fail' }}
 
     - name: Download Wiz-cli
@@ -47,11 +47,11 @@ jobs:
 
     - name: Run wiz-cli IaC scan
       run: |
-        ./wizcli iac scan --path "$SCAN_PATH" --policy "$IAC_POLICY" # -p "secrets"
+        ./wizcli iac scan --path ${{ env.SCAN_PATH }} --policy "$IAC_POLICY" # -p "secrets"
 
     - name: Build the Passing Docker image
       run: |
-        docker build $SCAN_PATH -t $IMAGE:$TAG
+        docker build ${{ env.SCAN_PATH }} -t $IMAGE:$TAG
     
     - name: Run wiz-cli Docker scan
       run: |
