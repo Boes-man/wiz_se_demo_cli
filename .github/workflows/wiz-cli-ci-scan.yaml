@@ -1,18 +1,8 @@
 name: 'wiz-cli-ci-scan'
 on: 
-  push:
-    branches: 
-    - container-fail
-    - container-pass
-    - iac-pass
-    - iac-fail
   pull_request:
-    branches:
-    - container-fail
-    - container-pass
-    - iac-pass
-    - iac-fail
-
+    branches: 
+    - main
 jobs:
   wiz-cli-container-scan:
     if: contains(github.event.pull_request.base.ref, 'container')
