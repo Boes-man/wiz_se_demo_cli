@@ -95,6 +95,8 @@ The github actions located in `.github/workflows` will provide the required acti
 
 10. Go back and view you PRs
 
+![](images/prs_listed.png)
+
 ----------------------
 </br>
 </br>
