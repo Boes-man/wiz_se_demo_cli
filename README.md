@@ -81,9 +81,7 @@ This repo is configured to have the following additonal branches
 
 7. Repeat for the other branches branches
 
-The guthub actions located in `.github/workflows` will provide the required actions during PRs
-
-The `iac` branch will use the `wiz-scan-iac.yaml` action and the `container` branch will use the `wiz-scan-container.yaml` action.
+The github actions located in `.github/workflows` will provide the required actions during PRs
 
 8. Enable branch protection
 
@@ -93,48 +91,35 @@ The `iac` branch will use the `wiz-scan-iac.yaml` action and the `container` bra
 
 ![](images/branch_policy.png)
 
-**NOTE: BE SURE TO SELECT ONE ACTION** `Wiz-cli Container Scan` and `Wiz-cli IaC Scan`
+**NOTE: BE SURE TO SELECT BOTH ACTIONS** `Wiz-cli Dockerfile and Container Scan` and `Wiz-cli IaC Scan`
 
 10. Go back and view you PRs
+
+----------------------
+</br>
+</br>
 
 ## Miscellaneous
 
 This repository is currently under development. If you see a problem please open an issue.
 
-### OPTIONAL - VS Code Setup
-
-Clone down a local copy of the repo and add it to VS Code
-Verify that you have all of the required branches
-
-```
-> git fetch
-> git branch
-  container-pass
-  iac-pass
-  container-fail
-  iac-fail
-* main
-```
-Use the git checkout command to switch between branches
-```
-> git checkout iac
-Switched to branch 'iac-pass'
-Your branch is up to date with 'origin/iac-pass'.
-```
-### Container Scanning
+### Container Scanning Inventory
 
 <b>Inventory</b></br>
-| Item | Purpose|
---------|--------|
-|secret.yaml| Contains secret in yaml|
-|Dockerfile| Image build instructions|
-|awssecret.txt|Contains secret in text|
+| Folder | Item | Purpose|
+--------|--------|------|
+|`contianer-pass`|`Dockerfile`| Should be built in a way to pass all checks|
+|`container-fail`|`Dockerfile`| Uses old version, copies in secrets, does not conform to standards|
+|`container-fail`|`awssecret.txt`|Contains secret in text|
+|`container-fail`|`secret.yaml`|Contains secret in text|
 
-### IaC Scanning
+### IaC Scanning Inventory
 
 <b>Inventory</b></br>
 | Folder | Purpose|
 --------|--------|
-|`aws/terraforn-eks`| Terraform instructions to build an EKS cluster |
-|`azure/terraform-aks`| Terraform instruction to build an AKS cluster|
+|`aws/terraforn-eks-pass`| Terraform instructions to build an EKS cluster |
+|`aws/terraforn-eks-fail`| Terraform instructions to build an EKS cluster |
+|`azure/terraform-aks-pass`| FUTURE USE |
+|`azure/terraform-aks-fail`| FUTURE USE |
 
