@@ -15,8 +15,8 @@ jobs:
       SCAN_PATH_FAIL: "container-fail"
       IMAGE: setestimage
       TAG: latest
-      IAC_POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
-      VULN_POLICIES: "derek-vlun"
+      IAC_POLICY: "iac-fail-medium" # Set the desired Wiz-cli policy to use
+      VULN_POLICIES: "vuln-one-medium"
       WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
       WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
       WIZ_ENV: ${{ secrets.WIZ_ENV }}
@@ -33,11 +33,11 @@ jobs:
 
     - name: Set path based on pass branch
       run: echo "SCAN_PATH=$SCAN_PATH_PASS" >> $GITHUB_ENV
-      if: ${{ github.ref == 'refs/heads/container-pass' }}
-
+      if: contains(github.event.pull_request.head.ref, 'container-pass')
+    
     - name: Set path based on fail branch
       run: echo "SCAN_PATH=$SCAN_PATH_FAIL" >> $GITHUB_ENV
-      if: ${{ github.ref == 'refs/heads/container-fail' }}
+      if: contains(github.event.pull_request.head.ref, 'container-fail')
 
     - name: Download Wiz-cli
       run: curl -o wizcli https://wizcli.app.wiz.io/wizcli && chmod +x wizcli
@@ -67,12 +67,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Set the relative path in the repo to scan
-      SCAN_PATH_PASS: "container-pass"
-      SCAN_PATH_FAIL: "container-fail"
-      IMAGE: setestimage
-      TAG: latest
-      IAC_POLICIES: "Default IaC policy" # Set the desired Wiz-cli policy to use
-      VULN_POLICIES: "derek-vlun"
+      SCAN_PATH_PASS: "aws/terraform-eks-pass"
+      SCAN_PATH_FAIL: "aws/terraform-eks-fail"
+      IAC_POLICY: "iac-fail-medium" # Set the desired Wiz-cli policy to use
       WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
       WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
       WIZ_ENV: ${{ secrets.WIZ_ENV }}
@@ -89,12 +86,12 @@ jobs:
 
     - name: Set path based on pass branch
       run: echo "SCAN_PATH=$SCAN_PATH_PASS" >> $GITHUB_ENV
-      if: ${{ github.ref == 'refs/heads/container-pass' }}
-
+      if: contains(github.event.pull_request.head.ref, 'iac-pass')
+      
     - name: Set path based on fail branch
       run: echo "SCAN_PATH=$SCAN_PATH_FAIL" >> $GITHUB_ENV
-      if: ${{ github.ref == 'refs/heads/container-fail' }}
-
+      if: contains(github.event.pull_request.head.ref, 'iac-fail')
+      
     - name: Download Wiz-cli
       run: curl -o wizcli https://wizcli.app.wiz.io/wizcli && chmod +x wizcli
 
@@ -104,14 +101,7 @@ jobs:
     - name: Run wiz-cli IaC scan
       run: |
         ./wizcli iac scan --path ${{ env.SCAN_PATH }} --policy "$IAC_POLICY" -p "secrets"
-    - name: Build the Passing Docker image
-      run: |
-        docker build ${{ env.SCAN_PATH }} -t $IMAGE:$TAG
     
-    - name: Run wiz-cli Docker scan
+    - name: Apply Infrastructure as Code
       run: |
-        ./wizcli docker scan --image $IMAGE:$TAG --policy "$VULN_POLICIES" -p "secrets"
-    
-    - name: Push docker image
-      run: |
-        echo "Pushing image here"
+        echo "applying iac templates"
