@@ -9,5 +9,5 @@ variable "password" {
 
 variable "k8s_connector_name" {
   description = "Connector name for the Wiz Connector in the portal"
-  default = "Bryan-McClellan-AKS"
+  default = "YourNameHere-AKS"
 }
