@@ -35,6 +35,8 @@ NOTE: BE SURE TO SELECT YOUR PERSONAL REPO
   * WIZ_CLIENT_ID
   * WIZ_CLIENT_SECRET
 
+NOTE: If targeting test you may also set the `WIZ_ENV` here as well.
+
 ![](images/create_secrets.png)
 
 4. Get coffee
